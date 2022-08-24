@@ -8,6 +8,7 @@ const urlSafeCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0
 const numericCharacters = '0123456789'.split('');
 const distinguishableCharacters = 'CDEHKMPRTUWXY012458'.split('');
 const asciiPrintableCharacters = '!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~'.split('');
+const jsonSafeCharacters = '!#$%&\'()*+,-.0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`abcdefghijklmnopqrstuvwxyz|~'.split('');
 const alphanumericCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'.split('');
 
 const generateForCustomCharacters = (length, characters) => {
@@ -79,6 +80,7 @@ const allowedTypes = [
 	'numeric',
 	'distinguishable',
 	'ascii-printable',
+	'json-safe',
 	'alphanumeric'
 ];
 
@@ -125,6 +127,10 @@ const createGenerator = (generateForCustomCharacters, generateRandomBytes) => ({
 
 	if (type === 'ascii-printable') {
 		return generateForCustomCharacters(length, asciiPrintableCharacters);
+	}
+
+	if (type === 'json-safe') {
+		return generateForCustomCharacters(length, jsonSafeCharacters);
 	}
 
 	if (type === 'alphanumeric') {
